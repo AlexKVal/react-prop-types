@@ -1,10 +1,4 @@
 import webpack from 'webpack';
-import yargs from 'yargs';
-
-export const options = yargs
-  .alias('p', 'optimize-minimize')
-  .alias('d', 'debug')
-  .argv;
 
 export const jsLoader = 'babel?cacheDirectory';
 
@@ -24,14 +18,10 @@ const baseConfig = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify(options.optimizeMinimize ? 'production' : 'development')
+        'NODE_ENV': JSON.stringify('development')
       }
     })
   ]
 };
-
-if (options.optimizeMinimize) {
-  baseConfig.devtool = 'source-map';
-}
 
 export default baseConfig;
